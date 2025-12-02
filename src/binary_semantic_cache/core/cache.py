@@ -1276,28 +1276,28 @@ class BinarySemanticCache:
             except (pickle.UnpicklingError, EOFError) as e:
                 raise CorruptFileError(f"Invalid responses pickle: {e}") from e
             
-            # Unpack entries and load into Rust storage
-            entry_struct = struct.Struct("<4Q3I")
+            # Bulk load entries into Rust storage (O(N) memcpy)
+            # This replaces the slow manual unpacking loop
+            try:
+                self._storage = RustCacheStorage.from_bytes_v3(
+                    entries_bytes,
+                    self._max_entries,
+                    self._code_bits
+                )
+            except ValueError as e:
+                raise CorruptFileError(f"Failed to load entries into Rust storage: {e}") from e
             
-            for i in range(n_entries):
-                offset = i * V3_ENTRY_SIZE
-                (
-                    code0, code1, code2, code3,
-                    created_at_rel, last_accessed_rel, access_count
-                ) = entry_struct.unpack_from(entries_bytes, offset)
-                
-                # Convert 2020-epoch relative timestamps back to Unix
-                created_at_unix = created_at_rel + EPOCH_2020
-                
-                # Create numpy array for code
-                code = np.array([code0, code1, code2, code3], dtype=np.uint64)
-                
-                # Add to Rust storage
-                idx = self._storage.add(code, created_at_unix)
-                
-                # Store response
-                if i < len(responses) and idx < len(self._responses):
-                    self._responses[idx] = responses[i]
+            # Hydrate responses list (align with Rust storage indices)
+            # Since we just loaded fresh storage, indices 0..n-1 map 1:1 to responses list
+            n_loaded = len(responses)
+            
+            # Pre-allocate response list to full capacity (already done in clear(), but ensure)
+            self._responses = [None] * self._max_entries
+            
+            # Copy loaded responses
+            if n_loaded > 0:
+                limit = min(n_loaded, self._max_entries)
+                self._responses[:limit] = responses[:limit]
             
             logger.info(
                 "Cache loaded (v3 format) from %s: %d entries",

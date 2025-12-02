@@ -1,7 +1,7 @@
 # Binary Semantic Cache
 
 ![Status](https://img.shields.io/badge/Status-Beta-yellow)
-![Version](https://img.shields.io/badge/Version-0.2.0-blue)
+![Version](https://img.shields.io/badge/Version-0.2.1-blue)
 ![Backend](https://img.shields.io/badge/Backend-Rust-orange)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
@@ -20,7 +20,7 @@ Most semantic caches are slow (Python-only), heavy (require VectorDB), or comple
 | **Latency (100k)** | **0.16 ms** ⚡ | ~2-5 ms | ~1.14 ms |
 | **Memory / Entry** | **~52 bytes** 🪶 | ~1-2 KB | ~120 bytes |
 | **Infrastructure** | **None (Local Lib)** | External Service | None |
-| **Persistence** | **Instant (mmap)** | Snapshots | Slow (Pickle) |
+| **Persistence** | **Fast Binary I/O** | Snapshots | Slow (Pickle) |
 | **Cost** | **Free** | $$$ | Free |
 
 > **Benchmark Source:** `benchmarks/results/cache_e2e_bench.json` (Intel i7, 100k entries).
@@ -142,7 +142,8 @@ graph LR
 Persistence is handled by a split-file strategy ensuring instant loading regardless of cache size:
 
 1.  **`entries.bin`**: A memory-mappable binary file containing compressed codes, timestamps, and access counts.
-    *   *Load Time:* < 10ms for 1M entries (Zero-Copy).
+    *   *Index Load Time:* < 10ms for 1M entries (search-ready).
+    *   *Full Load Time:* ~300ms for 1M entries (includes response hydration).
 2.  **`responses.pkl`**: A standard Python pickle file for storing arbitrary response objects (strings, dicts, JSON).
     *   *Integrity:* Secured with SHA-256 checksums.
 

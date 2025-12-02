@@ -76,5 +76,6 @@ commands/
 debug/
 phase2_roadmap/
 terminals/
+prompts/
 output.txt
 

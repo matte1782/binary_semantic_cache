@@ -154,7 +154,10 @@ class TestOllamaEmbedder:
 
     def test_default_init(self) -> None:
         """Default initialization should work."""
-        with patch.dict("os.environ", {}, clear=True):
+        # We must preserve PATH for ctypes/dll loading on Windows, otherwise trio/httpx fails
+        safe_env = {k: v for k, v in os.environ.items() if k.upper() in ["PATH", "SYSTEMROOT", "WINDIR"]}
+        
+        with patch.dict("os.environ", safe_env, clear=True):
             from binary_semantic_cache.embeddings.ollama_backend import (
                 OllamaEmbedder,
                 DEFAULT_HOST,

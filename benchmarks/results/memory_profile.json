@@ -1,7 +1,7 @@
 {
-  "timestamp": "2025-11-30T19:44:27.913206",
+  "timestamp": "2025-12-02T14:57:52.128689",
   "system_info": {
-    "python_version": "3.13.5",
+    "python_version": "3.13.9",
     "platform": "Windows-11-10.0.26200-SP0",
     "processor": "Intel64 Family 6 Model 197 Stepping 2, GenuineIntel"
   },
@@ -12,11 +12,11 @@
   "profiles": [
     {
       "n_entries": 10000,
-      "memory_mb": 2.221959114074707,
-      "peak_mb": 6.587384223937988,
-      "bytes_per_entry": 232.9893,
+      "memory_mb": 2.2218856811523438,
+      "peak_mb": 6.587310791015625,
+      "bytes_per_entry": 232.9816,
       "theoretical_mb": 0.30517578125,
-      "overhead_ratio": 7.280915625,
+      "overhead_ratio": 7.280675,
       "sprint_1c": {
         "rust_index_bytes": 440000,
         "rust_index_per_entry": 44.0,
