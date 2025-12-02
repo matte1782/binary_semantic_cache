@@ -1,0 +1,43 @@
+{
+  "timestamp": "2025-12-01T18:46:46.603879",
+  "system_info": {
+    "python_version": "3.13.9",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 197 Stepping 2, GenuineIntel"
+  },
+  "config": {
+    "embedding_dim": 384,
+    "code_bits": 256,
+    "primary_target_size": 1000000,
+    "primary_target_load_ms": 100.0
+  },
+  "persistence_format": "v3",
+  "benchmarks": [
+    {
+      "n_entries": 1000000,
+      "peak_rss_mb": null,
+      "save_v3": {
+        "mean_ms": 2663.3971666657694,
+        "min_ms": 2368.6784999990778,
+        "max_ms": 2958.970899999258,
+        "std_ms": 240.98662166013384,
+        "checksum_ms": 109.7020999986853
+      },
+      "load_v3": {
+        "full_load": {
+          "mean_ms": 1179.2604800000845,
+          "min_ms": 1132.4917999991158,
+          "max_ms": 1348.752300000342,
+          "std_ms": 85.00098384914152
+        },
+        "codes_only_ms": 9.688599999208236
+      },
+      "first_query": {
+        "first_query_ms": 0.20770000264747068,
+        "mean_subsequent_ms": 0.0967222218201237,
+        "hit": true
+      }
+    }
+  ],
+  "primary_target_passed": false
+}

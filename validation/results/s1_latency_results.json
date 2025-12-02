@@ -1,0 +1,21 @@
+{
+  "stage": "S1",
+  "timestamp": "2025-11-28T23:18:07.947792",
+  "encode": {
+    "n_samples": 1000,
+    "per_sample_ms": 0.6531820999989577,
+    "pass": true
+  },
+  "lookup": {
+    "n_entries": 100000,
+    "per_query_us": 219008.80799999868,
+    "pass": false
+  },
+  "memory": {
+    "n_entries": 100000,
+    "actual_mb": 3.051849365234375,
+    "theoretical_mb": 3.0517578125,
+    "pass": true
+  },
+  "overall_pass": true
+}

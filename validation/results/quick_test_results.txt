@@ -1,0 +1,4 @@
+encode_ms=0.566
+memory_mb=3.05
+similarity=0.6367
+all_pass=True

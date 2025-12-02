@@ -1,0 +1,76 @@
+{
+  "timestamp": "2025-11-29T17:06:30.843805",
+  "model": "nomic-embed-text",
+  "threshold": 0.8,
+  "corpus_size": 15,
+  "query_count": 5,
+  "embedding_dim": 768,
+  "embed_time_mean_ms": 31.78707333378649,
+  "embed_time_min_ms": 23.430299988831393,
+  "embed_time_max_ms": 42.33050000038929,
+  "insert_time_mean_ms": 0.7557666637391472,
+  "query_accuracy": 1.0,
+  "correct_predictions": 5,
+  "lookup_time_mean_ms": 1.1422600015066564,
+  "query_results": [
+    {
+      "query": "How can I reverse a string in Python?",
+      "category": "string reverse",
+      "expected_hit": true,
+      "actual_hit": true,
+      "correct": true,
+      "lookup_time_ms": 1.179200000478886,
+      "matched_text": "How do I reverse a string in Python?",
+      "similarity": 0.96875
+    },
+    {
+      "query": "How is the weather right now?",
+      "category": "weather",
+      "expected_hit": true,
+      "actual_hit": true,
+      "correct": true,
+      "lookup_time_ms": 1.0378000006312504,
+      "matched_text": "Tell me the current weather conditions",
+      "similarity": 0.8671875
+    },
+    {
+      "query": "How to make homemade pasta?",
+      "category": "pasta",
+      "expected_hit": true,
+      "actual_hit": true,
+      "correct": true,
+      "lookup_time_ms": 1.2086000060662627,
+      "matched_text": "What's the recipe for homemade pasta?",
+      "similarity": 0.88671875
+    },
+    {
+      "query": "What is quantum computing?",
+      "category": "quantum",
+      "expected_hit": false,
+      "actual_hit": false,
+      "correct": true,
+      "lookup_time_ms": 1.175800003693439,
+      "matched_text": null,
+      "similarity": null
+    },
+    {
+      "query": "How tall is Mount Everest?",
+      "category": "mountain",
+      "expected_hit": false,
+      "actual_hit": false,
+      "correct": true,
+      "lookup_time_ms": 1.1098999966634437,
+      "matched_text": null,
+      "similarity": null
+    }
+  ],
+  "similarity_correlation": 0.9899497864233714,
+  "cache_stats": {
+    "size": 15,
+    "hits": 3,
+    "misses": 2,
+    "hit_rate": 0.6,
+    "memory_mb": 0.002288818359375
+  },
+  "passed": "True"
+}

@@ -1,0 +1,80 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDEs
+.idea/
+.vscode/
+.cursor/
+*.swp
+*.swo
+
+# Testing
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Logs
+*.log
+
+# Rust / Maturin
+target/
+src/binary_semantic_cache_rs/target/
+src/binary_semantic_cache_rs/cargo_test_output.txt
+
+# Project Specific Internal Docs & Artifacts
+docs/PHASE2_*
+docs/DECISION_LOG*
+docs/HOSTILE_REVIEW*
+docs/MANDATORY_FIXES_IMPLEMENTED.md
+docs/MEMORY_NOTES.md
+docs/PHASE1_*
+docs/PHASE_1_*
+PHASE1_*.md
+PHASE_1_*.md
+docs/phase2_specs/
+docs/phase2_roadmap/
+
+# Internal Folders & Files
+commands/
+debug/
+phase2_roadmap/
+terminals/
+output.txt
+

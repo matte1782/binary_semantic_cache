@@ -1,0 +1,159 @@
+[build-system]
+requires = ["maturin>=1.4,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "binary-semantic-cache"
+version = "0.2.0"
+description = "High-performance semantic caching for LLM APIs using binary embeddings"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+    { name = "Matteo Panzeri", email = "matteo1782@gmail.com" }
+]
+maintainers = [
+    { name = "Matteo Panzeri", email = "matteo1782@gmail.com" }
+]
+keywords = [
+    "llm",
+    "cache",
+    "semantic",
+    "binary",
+    "embeddings",
+    "openai",
+    "api",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Rust",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed",
+]
+
+dependencies = [
+    "numpy>=1.24",
+    "numba>=0.58",
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+]
+
+[project.optional-dependencies]
+proxy = [
+    "fastapi>=0.100",
+    "uvicorn>=0.23",
+    "httpx>=0.25",
+]
+openai = [
+    "openai>=1.0",
+    "tiktoken>=0.5",
+    "tenacity>=8.0",
+]
+local = [
+    "sentence-transformers>=2.2",
+]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+    "pytest-cov>=4.0",
+    "mypy>=1.5",
+    "ruff>=0.1",
+    "black>=23.0",
+    "maturin>=1.4",
+]
+all = [
+    "binary-semantic-cache[proxy,openai,local,dev]",
+]
+
+[project.urls]
+Homepage = "https://github.com/matte1782/binary_semantic_cache"
+Documentation = "https://github.com/matte1782/binary_semantic_cache#readme"
+Repository = "https://github.com/matte1782/binary_semantic_cache.git"
+
+[project.scripts]
+bsc-server = "binary_semantic_cache.proxy.server:main"
+
+# Maturin configuration for mixed Rust/Python builds
+[tool.maturin]
+# Path to the Rust extension source
+manifest-path = "src/binary_semantic_cache_rs/Cargo.toml"
+# Python source directory
+python-source = "src"
+# Module name for the Rust extension
+module-name = "binary_semantic_cache.binary_semantic_cache_rs"
+# Build features
+features = ["pyo3/extension-module"]
+# Strip debug symbols in release builds
+strip = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+asyncio_mode = "auto"
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_return_any = true
+warn_unused_ignores = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+
+[[tool.mypy.overrides]]
+module = [
+    "numba",
+    "numba.*",
+    "sentence_transformers",
+    "sentence_transformers.*",
+]
+ignore_missing_imports = true
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+]
+ignore = [
+    "E501",  # line too long (handled by black)
+    "B008",  # do not perform function calls in argument defaults
+    "C901",  # too complex
+]
+
+[tool.ruff.isort]
+known-first-party = ["binary_semantic_cache"]
+
+[tool.black]
+target-version = ["py310"]
+line-length = 88
+
+[tool.coverage.run]
+source = ["src/binary_semantic_cache"]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if TYPE_CHECKING:",
+]
+

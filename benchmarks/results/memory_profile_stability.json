@@ -1,0 +1,195 @@
+{
+  "timestamp": "2025-12-01T00:17:32.777845",
+  "system_info": {
+    "python_version": "3.13.5",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 197 Stepping 2, GenuineIntel"
+  },
+  "config": {
+    "embedding_dim": 384,
+    "code_bits": 256,
+    "trials": 5
+  },
+  "sizes": [
+    10000,
+    50000,
+    100000,
+    500000
+  ],
+  "profiles": [
+    {
+      "n_entries": 10000,
+      "trials": 5,
+      "index_bytes_per_entry": {
+        "values": [
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0
+        ],
+        "mean": 44.0,
+        "stddev": 0.0
+      },
+      "response_bytes_per_entry": {
+        "values": [
+          8.0856,
+          8.0856,
+          8.0856,
+          8.0856,
+          8.0856
+        ],
+        "mean": 8.0856,
+        "stddev": 0.0
+      },
+      "total_bytes_per_entry": {
+        "values": [
+          52.0856,
+          52.0856,
+          52.0856,
+          52.0856,
+          52.0856
+        ],
+        "mean": 52.0856,
+        "stddev": 0.0
+      }
+    },
+    {
+      "n_entries": 50000,
+      "trials": 5,
+      "index_bytes_per_entry": {
+        "values": [
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0
+        ],
+        "mean": 44.0,
+        "stddev": 0.0
+      },
+      "response_bytes_per_entry": {
+        "values": [
+          8.01712,
+          8.01712,
+          8.01712,
+          8.01712,
+          8.01712
+        ],
+        "mean": 8.01712,
+        "stddev": 0.0
+      },
+      "total_bytes_per_entry": {
+        "values": [
+          52.01712,
+          52.01712,
+          52.01712,
+          52.01712,
+          52.01712
+        ],
+        "mean": 52.01712,
+        "stddev": 0.0
+      }
+    },
+    {
+      "n_entries": 100000,
+      "trials": 5,
+      "index_bytes_per_entry": {
+        "values": [
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0
+        ],
+        "mean": 44.0,
+        "stddev": 0.0
+      },
+      "response_bytes_per_entry": {
+        "values": [
+          8.00856,
+          8.00856,
+          8.00856,
+          8.00856,
+          8.00856
+        ],
+        "mean": 8.00856,
+        "stddev": 0.0
+      },
+      "total_bytes_per_entry": {
+        "values": [
+          52.00856,
+          52.00856,
+          52.00856,
+          52.00856,
+          52.00856
+        ],
+        "mean": 52.00856,
+        "stddev": 0.0
+      }
+    },
+    {
+      "n_entries": 500000,
+      "trials": 5,
+      "index_bytes_per_entry": {
+        "values": [
+          44.0,
+          44.0,
+          44.0,
+          44.0,
+          44.0
+        ],
+        "mean": 44.0,
+        "stddev": 0.0
+      },
+      "response_bytes_per_entry": {
+        "values": [
+          8.001712,
+          8.001712,
+          8.001712,
+          8.001712,
+          8.001712
+        ],
+        "mean": 8.001712,
+        "stddev": 0.0
+      },
+      "total_bytes_per_entry": {
+        "values": [
+          52.001712,
+          52.001712,
+          52.001712,
+          52.001712,
+          52.001712
+        ],
+        "mean": 52.001712,
+        "stddev": 0.0
+      }
+    }
+  ],
+  "stability_summary": {
+    "midscale_variation_percent": 0.016457474731231138,
+    "midscale_variation_threshold_percent": 5.0,
+    "midscale_pass": true,
+    "run_to_run_cv_percent": {
+      "10000": 0.0,
+      "50000": 0.0,
+      "100000": 0.0,
+      "500000": 0.0
+    },
+    "run_to_run_threshold_percent": 3.0,
+    "run_to_run_pass": true,
+    "total_cap_bytes_per_entry": 150.0,
+    "total_cap_scales": [
+      100000,
+      500000
+    ],
+    "total_cap_measured": {
+      "100000": 52.00856,
+      "500000": 52.001712
+    },
+    "total_cap_pass": true,
+    "index_target": 44.0,
+    "index_target_pass": true,
+    "overall_pass": true
+  }
+}

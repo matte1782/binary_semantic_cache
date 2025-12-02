@@ -1,0 +1,32 @@
+{
+  "timestamp": "2025-11-29T01:16:01.107211",
+  "tests": [
+    {
+      "test": "similar_hit",
+      "description": "Similar embedding (0.95 cosine) should HIT",
+      "target_cosine": 0.95,
+      "actual_cosine": 0.9500000476837158,
+      "expected": "HIT",
+      "actual": "HIT",
+      "pass": true
+    },
+    {
+      "test": "different_miss",
+      "description": "Different embedding should MISS",
+      "actual_cosine": -0.0022736825048923492,
+      "expected": "MISS",
+      "actual": "MISS",
+      "pass": true
+    },
+    {
+      "test": "exact_hit",
+      "description": "Exact embedding should HIT with sim=1.0",
+      "expected": "HIT",
+      "actual": "HIT",
+      "pass": true
+    }
+  ],
+  "passed": 3,
+  "total": 3,
+  "pass": true
+}

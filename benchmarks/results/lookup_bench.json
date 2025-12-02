@@ -1,0 +1,90 @@
+{
+  "timestamp": "2025-11-30T01:40:47.175594",
+  "system_info": {
+    "python_version": "3.13.9",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 197 Stepping 2, GenuineIntel",
+    "numpy_version": "2.3.5",
+    "numba_available": true
+  },
+  "config": {
+    "code_bits": 256,
+    "warmup_iterations": 5
+  },
+  "by_cache_size": [
+    {
+      "n_entries": 1000,
+      "n_queries": 100,
+      "iterations": 100,
+      "backend": "numba",
+      "mean_us": 48.90599942882545,
+      "std_us": 11.490246324516502,
+      "min_us": 37.39999374374747,
+      "max_us": 115.30000483617187,
+      "mean_ms": 0.04890599942882545
+    },
+    {
+      "n_entries": 10000,
+      "n_queries": 100,
+      "iterations": 100,
+      "backend": "numba",
+      "mean_us": 305.2199992816895,
+      "std_us": 192.00197527460156,
+      "min_us": 151.69999096542597,
+      "max_us": 1908.1999926129356,
+      "mean_ms": 0.3052199992816895
+    },
+    {
+      "n_entries": 100000,
+      "n_queries": 100,
+      "iterations": 50,
+      "backend": "numba",
+      "mean_us": 1995.748000626918,
+      "std_us": 589.6082074934918,
+      "min_us": 1210.0999883841723,
+      "max_us": 3312.8999930340797,
+      "mean_ms": 1.995748000626918
+    },
+    {
+      "n_entries": 500000,
+      "n_queries": 100,
+      "iterations": 50,
+      "backend": "numba",
+      "mean_us": 10775.777999660932,
+      "std_us": 2529.3896635210217,
+      "min_us": 6658.800004515797,
+      "max_us": 16145.00000141561,
+      "mean_ms": 10.775777999660932
+    }
+  ],
+  "numba_vs_numpy": [
+    {
+      "n_entries": 100000,
+      "n_queries": 100,
+      "iterations": 50,
+      "backend": "numpy",
+      "mean_us": 10957.096000493038,
+      "std_us": 1638.1416493776603,
+      "min_us": 8724.100000108592,
+      "max_us": 20032.70000568591,
+      "mean_ms": 10.957096000493038
+    },
+    {
+      "n_entries": 100000,
+      "n_queries": 100,
+      "iterations": 50,
+      "backend": "numba",
+      "mean_us": 5354.2580010253005,
+      "std_us": 5527.696466878922,
+      "min_us": 1645.2999989269301,
+      "max_us": 32895.60000121128,
+      "mean_ms": 5.3542580010253005
+    }
+  ],
+  "speedup": 2.0464266007343754,
+  "summary": {
+    "lookup_100k_mean_ms": 1.995748000626918,
+    "target_ms": 1.0,
+    "target_met": false
+  }
+}

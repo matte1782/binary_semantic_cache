@@ -1,0 +1,91 @@
+{
+  "timestamp": "2025-12-02T00:39:44.740385",
+  "config": {
+    "batch_sizes": [
+      1,
+      10,
+      50,
+      100,
+      150,
+      200
+    ],
+    "trials": 10,
+    "real_api": false
+  },
+  "mode_a": {
+    "batching": {
+      "1": {
+        "mean_ms": 0.5773299999418668,
+        "std_ms": 0.7573188437800388,
+        "min_ms": 0.2808999997796491,
+        "max_ms": 2.8395999979693443,
+        "overhead_per_call_ms": 0.5773299999418668,
+        "expected_api_calls": 1,
+        "actual_api_calls_per_trial": 0
+      },
+      "10": {
+        "mean_ms": 1.4446299996052403,
+        "std_ms": 0.08952761580601332,
+        "min_ms": 1.2831000058213249,
+        "max_ms": 1.553599999169819,
+        "overhead_per_call_ms": 1.4446299996052403,
+        "expected_api_calls": 1,
+        "actual_api_calls_per_trial": 0
+      },
+      "50": {
+        "mean_ms": 6.96241000041482,
+        "std_ms": 2.310272966015153,
+        "min_ms": 5.088700003398117,
+        "max_ms": 12.080000000423752,
+        "overhead_per_call_ms": 6.96241000041482,
+        "expected_api_calls": 1,
+        "actual_api_calls_per_trial": 0
+      },
+      "100": {
+        "mean_ms": 12.81124999950407,
+        "std_ms": 8.550217748125817,
+        "min_ms": 7.461599998350721,
+        "max_ms": 37.476500001503155,
+        "overhead_per_call_ms": 12.81124999950407,
+        "expected_api_calls": 1,
+        "actual_api_calls_per_trial": 0
+      },
+      "150": {
+        "mean_ms": 15.503090000129305,
+        "std_ms": 2.8845711474517617,
+        "min_ms": 11.904400002094917,
+        "max_ms": 20.14239999698475,
+        "overhead_per_call_ms": 7.751545000064652,
+        "expected_api_calls": 2,
+        "actual_api_calls_per_trial": 0
+      },
+      "200": {
+        "mean_ms": 24.90754999962519,
+        "std_ms": 18.313407637445607,
+        "min_ms": 14.990299998316914,
+        "max_ms": 79.40790000429843,
+        "overhead_per_call_ms": 12.453774999812595,
+        "expected_api_calls": 2,
+        "actual_api_calls_per_trial": 0
+      }
+    },
+    "rate_limiter": {
+      "mean_ms": 0.0003578000032575801,
+      "std_ms": 0.0001242543095857037,
+      "p99_ms": 0.0004999965312890708,
+      "target_ms": 0.1,
+      "pass": "True"
+    },
+    "cost_tracking": {
+      "get_stats_mean_ms": 0.0001735000405460596,
+      "get_stats_p99_ms": 0.000299995081149973,
+      "sample_stats": {
+        "requests": 1,
+        "tokens": 10,
+        "cost_usd": 2.0000000000000002e-07,
+        "errors": 0
+      }
+    }
+  },
+  "mode_b": null
+}

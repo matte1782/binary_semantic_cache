@@ -1,0 +1,18 @@
+{
+  "stage": "S3",
+  "timestamp": "2025-11-28T23:18:07.957269",
+  "tests": {
+    "similar_hit": {
+      "pass": false,
+      "similarity": null
+    },
+    "different_miss": {
+      "pass": true
+    },
+    "exact_hit": {
+      "pass": true,
+      "similarity": 1.0
+    }
+  },
+  "overall_pass": false
+}

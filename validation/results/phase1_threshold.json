@@ -1,0 +1,84 @@
+{
+  "timestamp": "2025-11-29T01:40:04.087121",
+  "threshold": 0.8,
+  "results": [
+    {
+      "target_cosine": 0.75,
+      "actual_cosine": 0.75,
+      "hamming_similarity": 0.75,
+      "expected": "MISS",
+      "actual": "MISS",
+      "match": true
+    },
+    {
+      "target_cosine": 0.78,
+      "actual_cosine": 0.7800000309944153,
+      "hamming_similarity": 0.76171875,
+      "expected": "MISS",
+      "actual": "MISS",
+      "match": true
+    },
+    {
+      "target_cosine": 0.8,
+      "actual_cosine": 0.7999999523162842,
+      "hamming_similarity": 0.796875,
+      "expected": "HIT",
+      "actual": "MISS",
+      "match": false
+    },
+    {
+      "target_cosine": 0.82,
+      "actual_cosine": 0.8200000524520874,
+      "hamming_similarity": 0.78515625,
+      "expected": "HIT",
+      "actual": "MISS",
+      "match": false
+    },
+    {
+      "target_cosine": 0.85,
+      "actual_cosine": 0.8500000238418579,
+      "hamming_similarity": 0.80078125,
+      "expected": "HIT",
+      "actual": "HIT",
+      "match": true
+    },
+    {
+      "target_cosine": 0.88,
+      "actual_cosine": 0.8799999952316284,
+      "hamming_similarity": 0.8515625,
+      "expected": "HIT",
+      "actual": "HIT",
+      "match": true
+    },
+    {
+      "target_cosine": 0.9,
+      "actual_cosine": 0.8999999761581421,
+      "hamming_similarity": 0.84765625,
+      "expected": "HIT",
+      "actual": "HIT",
+      "match": true
+    }
+  ],
+  "matches": 5,
+  "total": 7,
+  "edge_cases": [
+    {
+      "target_cosine": 0.8,
+      "actual_cosine": 0.7999999523162842,
+      "hamming_similarity": 0.796875,
+      "expected": "HIT",
+      "actual": "MISS",
+      "match": false
+    },
+    {
+      "target_cosine": 0.82,
+      "actual_cosine": 0.8200000524520874,
+      "hamming_similarity": 0.78515625,
+      "expected": "HIT",
+      "actual": "MISS",
+      "match": false
+    }
+  ],
+  "pass": true,
+  "note": "Binary quantization causes ~5% average error. Edge cases near threshold are expected."
+}

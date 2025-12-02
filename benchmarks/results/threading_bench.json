@@ -1,0 +1,77 @@
+{
+  "timestamp": "2025-11-29T01:54:56.185771",
+  "system_info": {
+    "python_version": "3.13.5",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 197 Stepping 2, GenuineIntel",
+    "cpu_count": 1
+  },
+  "config": {
+    "embedding_dim": 384,
+    "code_bits": 256,
+    "cache_size": 10000
+  },
+  "scenarios": [
+    {
+      "n_threads": 10,
+      "requests_per_thread": 100,
+      "total_requests": 1000,
+      "total_time_s": 1.8815962000007858,
+      "throughput_rps": 531.4636583553806,
+      "hits": 55,
+      "misses": 945,
+      "hit_rate": 0.055,
+      "latency": {
+        "mean_ms": 17.157871499977773,
+        "std_ms": 12.801549015253038,
+        "min_ms": 2.0106000010855496,
+        "max_ms": 107.3125999973854,
+        "p50_ms": 10.51059999736026,
+        "p95_ms": 41.17687500547618,
+        "p99_ms": 67.91555999669072
+      }
+    },
+    {
+      "n_threads": 50,
+      "requests_per_thread": 20,
+      "total_requests": 1000,
+      "total_time_s": 2.0807459999996354,
+      "throughput_rps": 480.59686285600225,
+      "hits": 200,
+      "misses": 800,
+      "hit_rate": 0.2,
+      "latency": {
+        "mean_ms": 88.25530730008177,
+        "std_ms": 75.70712694958296,
+        "min_ms": 3.2811999990371987,
+        "max_ms": 635.7634999949369,
+        "p50_ms": 55.580050000571646,
+        "p95_ms": 235.85146500445254,
+        "p99_ms": 399.322483004507
+      }
+    },
+    {
+      "n_threads": 100,
+      "requests_per_thread": 10,
+      "total_requests": 1000,
+      "total_time_s": 2.205124899999646,
+      "throughput_rps": 453.4890517993609,
+      "hits": 227,
+      "misses": 773,
+      "hit_rate": 0.227,
+      "latency": {
+        "mean_ms": 178.7780655999013,
+        "std_ms": 151.5331768358552,
+        "min_ms": 2.3769999970681965,
+        "max_ms": 1222.323799993319,
+        "p50_ms": 116.280000002007,
+        "p95_ms": 459.4028400035312,
+        "p99_ms": 794.9698329962848
+      }
+    }
+  ],
+  "summary": {
+    "all_scenarios_completed": true,
+    "no_race_conditions": true
+  }
+}

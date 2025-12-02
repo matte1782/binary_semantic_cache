@@ -1,0 +1,13 @@
+{
+  "timestamp": "2025-11-29T01:42:34.078148",
+  "n_entries": 100000,
+  "theoretical_mb": 3.0517578125,
+  "current_mb": 23.76655864715576,
+  "peak_mb": 28.069750785827637,
+  "target_mb": 10.0,
+  "strict_target_mb": 5.0,
+  "poc_memory_mb": 3.051849365234375,
+  "overhead_mb": 20.714709281921387,
+  "strict_pass": false,
+  "pass": false
+}

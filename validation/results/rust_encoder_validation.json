@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-11-29T18:39:50.701568",
+  "config": {
+    "n_vectors": 1000,
+    "embedding_dim": 384,
+    "code_bits": 256,
+    "seed": 42,
+    "test_seed": 12345,
+    "warmup_iterations": 10
+  },
+  "status": "PASSED",
+  "bit_exact_match": true,
+  "n_matched": 1000,
+  "n_total": 1000,
+  "mismatches": [],
+  "timing": {
+    "python_total_ms": 107.16020000108983,
+    "python_per_vector_us": 107.16020000108983,
+    "rust_total_ms": 57.99480000860058,
+    "rust_per_vector_us": 57.99480000860058
+  },
+  "speedup": 1.847755315738619
+}

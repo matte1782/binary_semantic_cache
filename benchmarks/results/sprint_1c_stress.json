@@ -1,0 +1,56 @@
+{
+  "timestamp": "2025-11-30T21:32:19.995025",
+  "system_info": {
+    "python_version": "3.13.5",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 197 Stepping 2, GenuineIntel",
+    "cpu_count": 1
+  },
+  "tests": [
+    {
+      "name": "RSP-05_thread_safety",
+      "n_threads": 8,
+      "ops_per_thread": 10000,
+      "total_ops": 80000,
+      "elapsed_s": 438.6402955999947,
+      "throughput_ops": 182.38178480746257,
+      "total_puts": 26672,
+      "total_gets": 26664,
+      "total_deletes": 26664,
+      "completed_threads": 8,
+      "errors": 0,
+      "error_messages": [],
+      "memory_growth_mb": 0.24518871307373047,
+      "memory_growth_pct": 207.33790322580643,
+      "no_errors": true,
+      "no_deadlock": true,
+      "no_leak": false,
+      "pass": false
+    },
+    {
+      "name": "RSP-06_memory_leak",
+      "n_threads": 4,
+      "ops_per_thread": 25000,
+      "total_ops": 100000,
+      "elapsed_s": 328.57193039997946,
+      "throughput_ops": 304.34736125592747,
+      "total_puts": 33336,
+      "total_gets": 33332,
+      "total_deletes": 33332,
+      "completed_threads": 4,
+      "errors": 0,
+      "error_messages": [],
+      "memory_growth_mb": 0.2230854034423828,
+      "memory_growth_pct": 188.6467741935484,
+      "no_errors": true,
+      "no_deadlock": true,
+      "no_leak": true,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "all_pass": false,
+    "tests_run": 2,
+    "tests_passed": 1
+  }
+}

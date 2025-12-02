@@ -1,0 +1,112 @@
+{
+  "timestamp": "2025-11-30T19:44:27.913206",
+  "system_info": {
+    "python_version": "3.13.5",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 197 Stepping 2, GenuineIntel"
+  },
+  "config": {
+    "embedding_dim": 384,
+    "code_bits": 256
+  },
+  "profiles": [
+    {
+      "n_entries": 10000,
+      "memory_mb": 2.221959114074707,
+      "peak_mb": 6.587384223937988,
+      "bytes_per_entry": 232.9893,
+      "theoretical_mb": 0.30517578125,
+      "overhead_ratio": 7.280915625,
+      "sprint_1c": {
+        "rust_index_bytes": 440000,
+        "rust_index_per_entry": 44.0,
+        "response_overhead_bytes": 80856,
+        "response_per_entry": 8.0856,
+        "total_cache_bytes": 520856,
+        "total_per_entry": 52.0856,
+        "rust_index_target": 44,
+        "rust_index_pass": true,
+        "total_target": 124,
+        "total_within_bounds": true
+      }
+    },
+    {
+      "n_entries": 50000,
+      "memory_mb": 3.74566650390625,
+      "peak_mb": 8.111038208007812,
+      "bytes_per_entry": 78.55232,
+      "theoretical_mb": 1.52587890625,
+      "overhead_ratio": 2.45476,
+      "sprint_1c": {
+        "rust_index_bytes": 2200000,
+        "rust_index_per_entry": 44.0,
+        "response_overhead_bytes": 400856,
+        "response_per_entry": 8.01712,
+        "total_cache_bytes": 2600856,
+        "total_per_entry": 52.01712,
+        "rust_index_target": 44,
+        "rust_index_pass": true,
+        "total_target": 124,
+        "total_within_bounds": true
+      }
+    },
+    {
+      "n_entries": 100000,
+      "memory_mb": 5.65301513671875,
+      "peak_mb": 10.018386840820312,
+      "bytes_per_entry": 59.27616,
+      "theoretical_mb": 3.0517578125,
+      "overhead_ratio": 1.85238,
+      "sprint_1c": {
+        "rust_index_bytes": 4400000,
+        "rust_index_per_entry": 44.0,
+        "response_overhead_bytes": 800856,
+        "response_per_entry": 8.00856,
+        "total_cache_bytes": 5200856,
+        "total_per_entry": 52.00856,
+        "rust_index_target": 44,
+        "rust_index_pass": true,
+        "total_target": 124,
+        "total_within_bounds": true
+      }
+    },
+    {
+      "n_entries": 500000,
+      "memory_mb": 20.91180419921875,
+      "peak_mb": 25.277175903320312,
+      "bytes_per_entry": 43.855232,
+      "theoretical_mb": 15.2587890625,
+      "overhead_ratio": 1.370476,
+      "sprint_1c": {
+        "rust_index_bytes": 22000000,
+        "rust_index_per_entry": 44.0,
+        "response_overhead_bytes": 4000856,
+        "response_per_entry": 8.001712,
+        "total_cache_bytes": 26000856,
+        "total_per_entry": 52.001712,
+        "rust_index_target": 44,
+        "rust_index_pass": true,
+        "total_target": 124,
+        "total_within_bounds": true
+      }
+    }
+  ],
+  "summary": {
+    "large_scale_bytes_per_entry": 43.855232,
+    "linear_scaling": true,
+    "converging": true,
+    "sublinear_growth": true,
+    "efficient": true,
+    "target_bytes_per_entry": 32,
+    "growth_100k_to_500k": 3.6992301795527918
+  },
+  "sprint_1c_summary": {
+    "rust_index_per_entry": 44.0,
+    "rust_index_target": 44,
+    "rust_index_pass": true,
+    "response_per_entry": 8.001712,
+    "total_per_entry": 52.001712,
+    "total_target": 124,
+    "total_within_bounds": true
+  }
+}

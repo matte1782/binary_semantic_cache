@@ -1,0 +1,32 @@
+[package]
+name = "binary_semantic_cache_rs"
+version = "0.1.0"
+edition = "2021"
+description = "High-performance Rust backend for binary semantic cache"
+license = "MIT"
+authors = ["Binary Semantic Cache Team"]
+
+[lib]
+name = "binary_semantic_cache_rs"
+# "cdylib" is required for Python extension modules
+crate-type = ["cdylib"]
+
+[dependencies]
+# PyO3 for Python bindings
+pyo3 = { version = "0.22", features = ["extension-module"] }
+# NumPy integration for PyO3
+numpy = "0.22"
+# N-dimensional array support
+ndarray = "0.16"
+
+[profile.release]
+# Optimize for speed
+opt-level = 3
+lto = true
+codegen-units = 1
+
+[profile.dev]
+# Faster dev builds
+opt-level = 0
+debug = true
+
