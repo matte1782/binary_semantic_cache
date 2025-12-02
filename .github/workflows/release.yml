@@ -23,8 +23,10 @@ jobs:
       - name: Install Rust
         if: runner.os != 'Linux'
         run: |
-          rustup update stable
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable --profile minimal
+          source $HOME/.cargo/env
           rustup target add aarch64-apple-darwin x86_64-apple-darwin
+          rustup show
           echo "$HOME/.cargo/bin" >> $GITHUB_PATH
 
       - name: Build wheels
@@ -41,7 +43,6 @@ jobs:
           # Linux: Install Rust in the manylinux/musllinux container
           CIBW_BEFORE_ALL_LINUX: "curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain stable --profile minimal"
           CIBW_ENVIRONMENT_LINUX: 'PATH="$PATH:$HOME/.cargo/bin"'
-          CIBW_ENVIRONMENT_MACOS: 'PATH="$PATH:$HOME/.cargo/bin"'
           
           # Build backend verification
           CIBW_BUILD_FRONTEND: build
