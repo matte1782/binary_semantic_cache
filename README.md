@@ -1,9 +1,9 @@
 # Binary Semantic Cache
 
-![Status](https://img.shields.io/badge/Status-Production%20Ready-success)
+![Status](https://img.shields.io/badge/Status-Beta-yellow)
 ![Version](https://img.shields.io/badge/Version-0.2.0-blue)
 ![Rust](https://img.shields.io/badge/Backend-Rust-orange)
-![Security](https://img.shields.io/badge/Security-Audited-blue)
+![Security](https://img.shields.io/badge/Security-Internally%20Reviewed-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 **Cut LLM costs by 50-90% with 10ms latency.**
@@ -19,7 +19,7 @@ Most semantic caches are slow (Python-only), heavy (requires VectorDB), or compl
 | Feature | **Binary Semantic Cache** | Redis / VectorDB | Python (NumPy) |
 | :--- | :--- | :--- | :--- |
 | **Latency (100k)** | **0.41 ms** ⚡ | ~2-5 ms | ~1.2 ms |
-| **Memory / Entry** | **~52 bytes** 🪶 | ~1-2 KB | ~120 bytes |
+| **Memory / Entry** | **~130 bytes** 🪶 | ~1-2 KB | ~120 bytes |
 | **Infrastructure** | **None (Local Lib)** | External Service | None |
 | **Persistence** | **Instant (mmap)** | Snapshots | Slow (Pickle) |
 | **Cost** | **Free** | $$$ | Free |
@@ -101,17 +101,24 @@ cache.put(vec, "Stored Locally")
 
 Phase 2.5 introduces a native **Rust** storage engine, delivering massive gains over the Python baseline.
 
+> **Note:** Benchmarks run on Intel i7, 100k entries. See `benchmarks/` for reproducibility.
+
 ```
 Lookup Latency (100k entries)
 -----------------------------
 Python (NumPy) : ██████████ 1.14 ms
-Rust (v0.2.0)  : ███ 0.41 ms ⚡
+Rust (v0.2.0)  : ███ 0.41 ms ⚡ (Index Only)
 
 Load Time (1M entries)
 ----------------------
 Pickle (Legacy): ████████████████████ 3000 ms
-Binary (v0.2.0): █ 9.7 ms ⚡ (Instant-On)
+Binary (v0.2.0): █ 9.7 ms ⚡ (mmap)
 ```
+
+**Memory Footprint (per entry):**
+- **Rust Index:** 44 bytes (fixed)
+- **Python Overhead:** ~80-90 bytes (response strings, object headers)
+- **Total:** ~130 bytes (vs 1-2KB for typical VectorDBs)
 
 ---
 
@@ -145,6 +152,14 @@ graph LR
 | `similarity_threshold` | `0.95` | Cosine similarity threshold (0.0-1.0). Lower = more hits, higher = precise. |
 | `code_bits` | `256` | Size of binary hash. Fixed at 256 for v0.2.0. |
 | `storage_mode` | `"memory"` | Currently memory-only (with disk persistence). |
+
+---
+
+## ⚠️ Limitations & Status
+
+- **Beta Status:** While rigorous testing is in place, this library is not yet battle-tested in large-scale production deployments.
+- **Embeddings:** Validated primarily on `text-embedding-3-small` (OpenAI) and `nomic-embed-text` (Ollama).
+- **Persistence:** Currently supports local disk persistence only. Cloud storage adapters (S3/GCS) are planned for Phase 3.
 
 ---
 
