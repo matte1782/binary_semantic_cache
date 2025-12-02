@@ -106,9 +106,12 @@ def benchmark_cache_get(
     """Benchmark cache.get() end-to-end latency."""
     n_queries = queries.shape[0]
     
-    # Warmup
-    for i in range(WARMUP_ITERATIONS):
-        cache.get(queries[i % n_queries])
+    # Warmup (Aggressive to settle JIT/CPU)
+    # Access same element repeatedly to ensure hot paths are optimized
+    if n_queries > 0:
+        warmup_query = queries[0]
+        for _ in range(100):
+            cache.get(warmup_query)
     
     # Measure
     times_us: List[float] = []

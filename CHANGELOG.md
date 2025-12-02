@@ -5,7 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.2.0] - 2025-12-02
+## [0.2.1] - 2025-12-02
+
+### Known Issues
+- **Full Cache Load Time:** Loading a 1M-entry cache takes ~300-350ms total. While the binary index is search-ready in <10ms, Python pickle deserialization of response objects adds ~300ms overhead. This is a known limitation of the hybrid Python/Rust architecture and will be addressed in a future release.
 
 ### Added
 - **Rust Storage Backend:** Core storage moved to Rust (`RustCacheStorage`), reducing memory usage to 44 bytes per entry (codes + metadata).
