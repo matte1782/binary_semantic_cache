@@ -156,8 +156,8 @@ Persistence is handled by a split-file strategy ensuring fast loading regardless
 | Parameter | Default | Description |
 | :--- | :--- | :--- |
 | `max_entries` | `1000` | Maximum items before LRU eviction. |
-| `similarity_threshold` | `0.95` | Cosine similarity threshold (0.0-1.0). Lower = more hits, higher = precise. |
-| `code_bits` | `256` | Size of binary hash. Fixed at 256 for v0.2.0. |
+| `similarity_threshold` | `0.80` | Cosine similarity threshold (0.0-1.0). Lower = more hits, higher = precise. |
+| `code_bits` | `256` | Size of binary hash. Fixed at 256 for v1.0.0. |
 | `storage_mode` | `"memory"` | Currently memory-only (with disk persistence). |
 
 ---

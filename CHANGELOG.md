@@ -8,10 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2025-12-02
 
 ### Summary
-First official production release. Features a hybrid Python/Rust architecture for sub-millisecond semantic caching.
+First official production release. Achieves < 1ms lookup latency and significant memory reduction via Rust backend.
 
 ### Known Issues
-- **Full Cache Load Time:** Loading a 1M-entry cache takes ~300-350ms total. While the binary index is search-ready in <10ms, Python pickle deserialization of response objects adds ~300ms overhead. This is a known limitation and will be addressed in v1.1+.
+- **Full Cache Load Time:** Loading a 1M-entry cache takes ~300-350ms total. While the binary index is search-ready in <10ms, Python pickle deserialization of response objects adds ~300ms overhead. This is a known limitation of the hybrid Python/Rust architecture and will be addressed in a future release.
 
 ### Added
 - **Rust Storage Backend:** Core storage moved to Rust (`RustCacheStorage`), reducing memory usage to 44 bytes per entry (codes + metadata).
@@ -21,7 +21,7 @@ First official production release. Features a hybrid Python/Rust architecture fo
 - **Migration Tool:** CLI tool to migrate legacy v2 caches to v3 format (`binary-semantic-cache migrate`).
 
 ### Changed
-- **Performance:** Lookup latency for 100k entries reduced from 1.14ms to 0.16ms (7x speedup).
+- **Performance:** Lookup latency for 100k entries reduced from 1.14ms to 0.41ms (2.8x speedup).
 - **Memory:** Total memory footprint per entry reduced from ~119 bytes to ~52 bytes.
 - **Dependency:** Added `maturin` build system for Rust extensions.
 
@@ -30,7 +30,8 @@ First official production release. Features a hybrid Python/Rust architecture fo
 - **Windows Compatibility:** Fixed Unicode encoding issues in benchmark reporting.
 
 ## [0.2.1] - 2025-12-02 (Beta)
-- *Pre-release version. All changes merged into 1.0.0.*
+*(Superseded by 1.0.0)*
+
 
 ## [0.1.0] - 2025-11-25
 
