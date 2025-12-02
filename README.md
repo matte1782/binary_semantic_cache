@@ -181,7 +181,7 @@ graph LR
 
 ## 🤝 Contributing
 
-We welcome contributions! Please read our [Engineering Log](docs/PHASE2_ENGINEERING_LOG.md) to understand the development process.
+We welcome contributions!
 
 **License:** [MIT](LICENSE)
 
