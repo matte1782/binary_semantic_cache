@@ -31,13 +31,13 @@ Most semantic caches are slow (Python-only), heavy (require VectorDB), or comple
 
 ### 1. Installation
 
-**Prerequisites:** Python 3.10+ and Rust (for source build).
+**Prerequisites:** Python 3.10+. Rust is only needed for source builds.
 
 ```bash
-# Option A: From PyPI (Coming Soon)
-# pip install "binary-semantic-cache[openai]"
+# Option A: From PyPI (Recommended)
+pip install "binary-semantic-cache[openai]"
 
-# Option B: From Source (Recommended for Beta)
+# Option B: From Source (Development)
 git clone https://github.com/matte1782/binary_semantic_cache.git
 cd binary_semantic_cache
 pip install maturin
