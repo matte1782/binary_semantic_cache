@@ -1,13 +1,13 @@
 # Binary Semantic Cache
 
-![Status](https://img.shields.io/badge/Status-Beta-yellow)
-![Version](https://img.shields.io/badge/Version-0.2.1-blue)
+![Status](https://img.shields.io/badge/Status-Production-green)
+![Version](https://img.shields.io/badge/Version-1.0.0-blue)
 ![Backend](https://img.shields.io/badge/Backend-Rust-orange)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 **Cut LLM costs by 50-90% with sub-millisecond latency.**
 
-A high-performance, enterprise-grade semantic cache for OpenAI and local LLMs. Powered by a **Rust core** for maximum speed, memory efficiency, and instant startup.
+A high-performance, enterprise-grade semantic cache for OpenAI and local LLMs. Powered by a **Rust core** for maximum speed, memory efficiency, and fast startup.
 
 ---
 
@@ -139,7 +139,7 @@ graph LR
 
 ### Persistence V3 (Dual-File Format)
 
-Persistence is handled by a split-file strategy ensuring instant loading regardless of cache size:
+Persistence is handled by a split-file strategy ensuring fast loading regardless of cache size:
 
 1.  **`entries.bin`**: A memory-mappable binary file containing compressed codes, timestamps, and access counts.
     *   *Index Load Time:* < 10ms for 1M entries (search-ready).
@@ -164,13 +164,16 @@ Persistence is handled by a split-file strategy ensuring instant loading regardl
 
 ## ⚠️ Limitations & Constraints
 
+For a detailed breakdown, see [Known Limitations (v1.0)](docs/KNOWN_LIMITATIONS_V1.md).
+
 *   **Linear Scan (O(N)):** This is *not* an Approximate Nearest Neighbor (ANN) index (like FAISS/HNSW). It performs a full linear scan.
     *   *Implication:* Extremely fast for N < 1M (Rust SIMD), but scales linearly.
+*   **Full Load Time:** While the index loads instantly, full hydration of 1M+ response objects takes ~300ms due to Python pickle overhead.
 *   **Memory Resident:** The entire index lives in RAM.
     *   *Implication:* 1M entries requires ~50MB RAM + Response Data.
 *   **Global Lock:** Uses a global `RLock` for thread safety.
-    *   *Implication:* Concurrent writes are serialized. Reads are fast enough that contention is rarely an issue.
-*   **Rust Dependency:** You *must* be able to build Rust extensions to install this library from source.
+    *   *Implication:* Concurrent writes are serialized.
+*   **Rust Dependency:** You *must* be able to build Rust extensions to install this library from source (no pre-built wheels yet).
 
 ---
 

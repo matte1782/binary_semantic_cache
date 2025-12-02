@@ -4,7 +4,7 @@ build-backend = "maturin"
 
 [project]
 name = "binary-semantic-cache"
-version = "0.2.1"
+version = "1.0.0"
 description = "High-performance semantic caching for LLM APIs using binary embeddings"
 readme = "README.md"
 license = "MIT"
@@ -99,6 +99,16 @@ python_files = ["test_*.py"]
 python_functions = ["test_*"]
 addopts = "-v --tb=short"
 asyncio_mode = "auto"
+filterwarnings = [
+    # Suppress expected deprecation warnings from our own code (v0.2.0 deprecated methods)
+    "ignore:save\\(\\) is deprecated:DeprecationWarning",
+    "ignore:load\\(\\) is deprecated:DeprecationWarning",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "resource_intensive: marks tests as resource intensive",
+    "external: marks tests that require external services (e.g., OpenAI API)",
+]
 
 [tool.mypy]
 python_version = "3.10"
