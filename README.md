@@ -2,27 +2,28 @@
 
 ![Status](https://img.shields.io/badge/Status-Beta-yellow)
 ![Version](https://img.shields.io/badge/Version-0.2.0-blue)
-![Rust](https://img.shields.io/badge/Backend-Rust-orange)
-![Security](https://img.shields.io/badge/Security-Internally%20Reviewed-blue)
+![Backend](https://img.shields.io/badge/Backend-Rust-orange)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-**Cut LLM costs by 50-90% with 10ms latency.**
+**Cut LLM costs by 50-90% with sub-millisecond latency.**
 
-A high-performance, enterprise-grade semantic cache for OpenAI and local LLMs. Powered by a **Rust core** for maximum speed and memory efficiency.
+A high-performance, enterprise-grade semantic cache for OpenAI and local LLMs. Powered by a **Rust core** for maximum speed, memory efficiency, and instant startup.
 
 ---
 
 ## ⚡ Why Use This?
 
-Most semantic caches are slow (Python-only), heavy (requires VectorDB), or complex (requires Redis).
+Most semantic caches are slow (Python-only), heavy (require VectorDB), or complex (require Redis).
 
 | Feature | **Binary Semantic Cache** | Redis / VectorDB | Python (NumPy) |
 | :--- | :--- | :--- | :--- |
-| **Latency (100k)** | **0.41 ms** ⚡ | ~2-5 ms | ~1.2 ms |
-| **Memory / Entry** | **~130 bytes** 🪶 | ~1-2 KB | ~120 bytes |
+| **Latency (100k)** | **0.16 ms** ⚡ | ~2-5 ms | ~1.14 ms |
+| **Memory / Entry** | **~52 bytes** 🪶 | ~1-2 KB | ~120 bytes |
 | **Infrastructure** | **None (Local Lib)** | External Service | None |
 | **Persistence** | **Instant (mmap)** | Snapshots | Slow (Pickle) |
 | **Cost** | **Free** | $$$ | Free |
+
+> **Benchmark Source:** `benchmarks/results/cache_e2e_bench.json` (Intel i7, 100k entries).
 
 ---
 
@@ -30,14 +31,17 @@ Most semantic caches are slow (Python-only), heavy (requires VectorDB), or compl
 
 ### 1. Installation
 
-```bash
-# From PyPI (when released)
-pip install "binary-semantic-cache[openai]"
+**Prerequisites:** Python 3.10+ and Rust (for source build).
 
-# From source (current)
+```bash
+# Option A: From PyPI (Coming Soon)
+# pip install "binary-semantic-cache[openai]"
+
+# Option B: From Source (Recommended for Beta)
 git clone https://github.com/matte1782/binary_semantic_cache.git
 cd binary_semantic_cache
-pip install -e ".[openai]"
+pip install maturin
+maturin develop --release --extras openai
 ```
 
 ### 2. Choose Your Backend
@@ -75,15 +79,13 @@ else:
 
 #### B. Ollama / Local (Development)
 
-Best for offline development and testing. Zero API costs.
-
-> **Prerequisite:** [Ollama](https://ollama.ai) must be running locally with `ollama pull nomic-embed-text`.
+Best for offline development. Zero API costs.
 
 ```python
 from binary_semantic_cache import BinarySemanticCache, BinaryEncoder
 from binary_semantic_cache.embeddings import OllamaEmbedder
 
-# 1. Setup Local Backend (Requires Ollama running)
+# 1. Setup Local Backend (Requires Ollama running with nomic-embed-text)
 embedder = OllamaEmbedder(model_name="nomic-embed-text")
 
 # 2. Initialize Cache (768 dimensions for Nomic)
@@ -99,26 +101,25 @@ cache.put(vec, "Stored Locally")
 
 ## 📊 Performance
 
-Phase 2.5 introduces a native **Rust** storage engine, delivering massive gains over the Python baseline.
+Phase 2.5 introduces a native **Rust** storage engine, delivering massive gains over the Phase 1 Python baseline.
 
-> **Note:** Benchmarks run on Intel i7, 100k entries. See `benchmarks/` for reproducibility.
+### Latency & Throughput (100k entries)
 
-```
-Lookup Latency (100k entries)
------------------------------
-Python (NumPy) : ██████████ 1.14 ms
-Rust (v0.2.0)  : ███ 0.41 ms ⚡ (Index Only)
+| Metric | Phase 1 (Python) | **Phase 2 (Rust)** | Speedup |
+| :--- | :--- | :--- | :--- |
+| **Mean Latency** | 1.14 ms | **0.16 ms** | **7.0x** 🚀 |
+| **Hit Latency** | ~0.10 ms | **0.05 ms** | 2.0x |
+| **Miss Latency** | ~1.20 ms | **0.30 ms** | 4.0x |
 
-Load Time (1M entries)
-----------------------
-Pickle (Legacy): ████████████████████ 3000 ms
-Binary (v0.2.0): █ 9.7 ms ⚡ (mmap)
-```
+### Memory Efficiency
 
-**Memory Footprint (per entry):**
-- **Rust Index:** 44 bytes (fixed)
-- **Python Overhead:** ~80-90 bytes (response strings, object headers)
-- **Total:** ~130 bytes (vs 1-2KB for typical VectorDBs)
+| Component | Size | Notes |
+| :--- | :--- | :--- |
+| **Rust Index** | 44 bytes | Fixed (Code + Metadata) |
+| **Python Response** | ~8 bytes | Pointer to stored object |
+| **Total / Entry** | **~52 bytes** | **vs ~120 bytes (Python)** |
+
+> **Note:** Actual memory usage depends on the size of your response strings. The cache overhead itself is minimal.
 
 ---
 
@@ -136,9 +137,14 @@ graph LR
     E -->|Results| B
 ```
 
-- **Python Shell:** Handles API, response storage, and developer UX.
-- **Rust Core:** Handles binary packing, Hamming distance search, and memory management.
-- **Fast Binary I/O:** Index is memory-mapped for near-instant startup (~10ms for 1M entries).
+### Persistence V3 (Dual-File Format)
+
+Persistence is handled by a split-file strategy ensuring instant loading regardless of cache size:
+
+1.  **`entries.bin`**: A memory-mappable binary file containing compressed codes, timestamps, and access counts.
+    *   *Load Time:* < 10ms for 1M entries (Zero-Copy).
+2.  **`responses.pkl`**: A standard Python pickle file for storing arbitrary response objects (strings, dicts, JSON).
+    *   *Integrity:* Secured with SHA-256 checksums.
 
 ---
 
@@ -155,33 +161,29 @@ graph LR
 
 ---
 
-## ⚠️ Limitations & Status
+## ⚠️ Limitations & Constraints
 
-- **Beta Status:** While rigorous testing is in place, this library is not yet battle-tested in large-scale production deployments.
-- **Embeddings:** Validated primarily on `text-embedding-3-small` (OpenAI) and `nomic-embed-text` (Ollama).
-- **Persistence:** Currently supports local disk persistence only. Cloud storage adapters (S3/GCS) are planned for Phase 3.
-
----
-
-## 📚 Documentation
-
-- **[OpenAI Usage Guide](docs/USAGE_OPENAI.md)** – Venv setup, rate limiting, troubleshooting.
-- **[Phase 2.5 Report](docs/PHASE2_5_COMPLETE.md)** – Detailed benchmarks and metrics.
-- **[Design Rationale](docs/DESIGN_RATIONALE_PHASE1.md)** – The math behind binary quantization.
+*   **Linear Scan (O(N)):** This is *not* an Approximate Nearest Neighbor (ANN) index (like FAISS/HNSW). It performs a full linear scan.
+    *   *Implication:* Extremely fast for N < 1M (Rust SIMD), but scales linearly.
+*   **Memory Resident:** The entire index lives in RAM.
+    *   *Implication:* 1M entries requires ~50MB RAM + Response Data.
+*   **Global Lock:** Uses a global `RLock` for thread safety.
+    *   *Implication:* Concurrent writes are serialized. Reads are fast enough that contention is rarely an issue.
+*   **Rust Dependency:** You *must* be able to build Rust extensions to install this library from source.
 
 ---
 
-## 🔒 Security
+## 🗺️ Roadmap (Phase 3)
 
-- **No API Keys Stored:** Keys are read from environment variables (`OPENAI_API_KEY`) and never written to disk.
-- **Local Only:** No data is sent to any third-party vector database.
-- **Audited:** Codebase passes rigorous "Hostile Review" gates.
+*   **Cloud Persistence:** S3 / GCS adapters for serverless deployments.
+*   **Distributed Cache:** Redis-backed shared state for multi-instance setups.
+*   **Approximate Search:** Evaluation of HNSW for >1M entry scaling.
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions!
+We welcome contributions! Please ensure you run the full benchmark suite before submitting PRs.
 
 **License:** [MIT](LICENSE)
 
