@@ -75,6 +75,7 @@ jobs:
   publish_to_pypi:
     needs: [build_wheels, build_sdist]
     runs-on: ubuntu-latest
+    environment: pypi
     permissions:
       id-token: write  # IMPORTANT: Mandatory for trusted publishing
     steps:
