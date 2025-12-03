@@ -90,6 +90,8 @@ python-source = "src"
 module-name = "binary_semantic_cache.binary_semantic_cache_rs"
 # Build features
 features = ["pyo3/extension-module"]
+# Include license file in the source distribution
+include = ["LICENSE"]
 # Strip debug symbols in release builds
 strip = true
 
