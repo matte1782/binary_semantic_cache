@@ -4,7 +4,7 @@ build-backend = "maturin"
 
 [project]
 name = "binary-semantic-cache"
-version = "1.0.0"
+version = "1.0.1"
 description = "High-performance semantic caching for LLM APIs using binary embeddings"
 readme = "README.md"
 license = "MIT"
